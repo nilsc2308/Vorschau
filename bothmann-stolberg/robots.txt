@@ -1,0 +1,6 @@
+# Vorschau — der Betrieb hat der Veröffentlichung noch nicht zugestimmt.
+# Vor dem Livegang auf Allow umstellen.
+User-agent: *
+Disallow: /
+
+Sitemap: https://nilsc2308.github.io/Vorschau/bothmann-stolberg/sitemap.xml

@@ -1,0 +1,182 @@
+# Netlify-Konfiguration für die Website N.J. Bothmann, Stolberg.
+# Diese Datei greift, wenn dieser Ordner als eigenes Netlify-Projekt
+# veröffentlicht wird. Auf GitHub Pages (der aktuellen Vorschau-Ablage)
+# hat sie keine Wirkung — dort sind Header nicht konfigurierbar.
+
+[build]
+  publish = "."
+  command = "python3 _build.py"
+
+# --------------------------------------------------------------------------
+# Sicherheits-Header
+# --------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+    # jsDelivr liefert GSAP und Lenis. Werden beide lokal ausgeliefert,
+    # kann https://cdn.jsdelivr.net aus script-src entfallen.
+    # 'unsafe-inline' wird für die JSON-LD-Blöcke und die Inline-Stile
+    # benötigt; mit Hashes ließe es sich später entfernen.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://www.openstreetmap.org; form-action 'self'; connect-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# --------------------------------------------------------------------------
+# Weiterleitungen der alten URLs (HomepageFIX-Struktur)
+# Quelle: Navigation von http://www.bothmann-stolberg.de
+# --------------------------------------------------------------------------
+[[redirects]]
+  from = "/elektrotechnik.html"
+  to = "/leistung-elektrotechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rauchwarnmelder.html"
+  to = "/ratgeber-rauchwarnmelder-nrw.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/heizungstechnik.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sanitaertechnik.html"
+  to = "/leistung-heizungstechnik.html#sanitaer"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/moderne_oelheizung.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/moderne_gasheizung.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/solar.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/waermepumpen.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/heizen_mit_holz.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/leistungen.html"
+  to = "/leistung-heizungstechnik.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/heizoellagerung.html"
+  to = "/leistung-tankschutz.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tankreinigung.html"
+  to = "/leistung-tankschutz.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/referenzen_pellets.html"
+  to = "/index.html#referenz"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/informationen.html"
+  to = "/ratgeber.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service_aktuell.html"
+  to = "/ratgeber.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/schornsteinfeger.html"
+  to = "/ratgeber.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/downloads.html"
+  to = "/kontakt.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/interessante_links.html"
+  to = "/ratgeber.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/link_disclaimer.html"
+  to = "/impressum.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/karte_x_anschrift.html"
+  to = "/kontakt.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/urlaubszeit.html"
+  to = "/ueber-uns.html"
+  status = 301
+  force = true
+
+# 404 zuletzt, damit alles andere vorher greift
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
